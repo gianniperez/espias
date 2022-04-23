@@ -1,5 +1,6 @@
 package Espias;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -36,8 +37,12 @@ public class Interfaz {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(500, 250, 450, 300);
+		frame.setTitle("Temible operario del recontraespionaje");
+		frame.getContentPane().setBackground(Color.GRAY);;
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.getContentPane().setLayout(null);
 	}
 
 }
