@@ -1,6 +1,7 @@
 package Espias;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public class Grafo {
@@ -81,5 +82,18 @@ public class Grafo {
 	{
 		if( i == j )
 			throw new IllegalArgumentException("No se permiten loops: (" + i + ", " + j + ")");
+	}
+	
+	public int dameVertice() {
+		if (estaVacio()) {
+			throw new RuntimeException("El grafo no tiene ningún vértice");
+		}
+		Random random = new Random();
+		int vertice = random.nextInt(this.tamano()-1);
+		return vertice;
+	}
+
+	public boolean estaVacio() {
+		return tamano() == 0;
 	}
 }

@@ -39,7 +39,7 @@ public class Conjunto<T> {
 		
 	public T dameElemento () {
 		if (estaVacio()) {
-			throw new RuntimeException("El conjunto est√° vac√≠o");
+			throw new RuntimeException("El conjunto est· vacÌo");
 		}
 			
 			
