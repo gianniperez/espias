@@ -8,8 +8,9 @@ public class Prim {
 	
 	public Prim (Grafo g) {
 		this.g = g;
-		//vertices = g; //inicia con cualquier vértice
-		aristas = new Conjunto<Integer>();
+		vertices = new Conjunto<Integer>(); //hace falta?
+		aristas = new Conjunto<Integer>(); //hace falta?
+		vertices.agregarElemento(g.dameVertice());
 	}
 	
 	private void arbol () {

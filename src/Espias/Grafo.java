@@ -1,5 +1,6 @@
 package Espias;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -8,21 +9,29 @@ public class Grafo {
 	// Representamos el grafo por su matriz de adyacencia
 	private boolean[][] A;
 	
+	private HashMap<Tupla<Integer, Integer>, Integer> aristas;
+	
 	// La cantidad de vertices esta predeterminada desde el constructor
 	public Grafo(int vertices)
 	{
 		A = new boolean[vertices][vertices];
+		aristas = new HashMap<Tupla<Integer, Integer>, Integer>();
 	}
 	
 	// Agregado de aristas
-	public void agregarArista(int i, int j)
-	{
+	public void agregarArista(int i, int j, int peso) {
 		verificarVertice(i);
 		verificarVertice(j);
 		verificarDistintos(i, j);
-
+		agregarPeso(i, j, peso);
+		
 		A[i][j] = true;
 		A[j][i] = true;
+	}
+	
+	private void agregarPeso(int i, int j, int peso) {
+		Tupla<Integer,Integer> arista = new Tupla<Integer,Integer>(i,j);
+		aristas.put(arista, peso);
 	}
 	
 	// Eliminacion de aristas
