@@ -9,17 +9,17 @@ public class Grafo {
 	// Representamos el grafo por su matriz de adyacencia
 	private boolean[][] A;
 	
-	private HashMap<Tupla<Integer, Integer>, Integer> aristas;
+	private HashMap<Tupla<Integer, Integer>, Double> aristas;
 	
 	// La cantidad de vertices esta predeterminada desde el constructor
 	public Grafo(int vertices)
 	{
 		A = new boolean[vertices][vertices];
-		aristas = new HashMap<Tupla<Integer, Integer>, Integer>();
+		aristas = new HashMap<Tupla<Integer, Integer>, Double>();
 	}
 	
 	// Agregado de aristas
-	public void agregarArista(int i, int j, int peso) {
+	public void agregarArista(int i, int j, double peso) {
 		verificarVertice(i);
 		verificarVertice(j);
 		verificarDistintos(i, j);
@@ -29,7 +29,7 @@ public class Grafo {
 		A[j][i] = true;
 	}
 	
-	private void agregarPeso(int i, int j, int peso) {
+	private void agregarPeso(int i, int j, double peso) {
 		Tupla<Integer,Integer> arista = new Tupla<Integer,Integer>(i,j);
 		aristas.put(arista, peso);
 	}
