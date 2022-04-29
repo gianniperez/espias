@@ -4,24 +4,24 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Prim {
+public class ArbolGenMinPrim {
 
 	private Grafo g;
+	private boolean[][] grafo;
 	private Conjunto<Integer> vertices;
 	private HashMap<Tupla<Integer, Integer>,Double> aristas;
 	
-	public Prim (Grafo g) {
+	public ArbolGenMinPrim (Grafo g) {
 		this.g = g;
-		vertices = new Conjunto<Integer>(); //hace falta?
-		aristas = new HashMap<Tupla<Integer, Integer>,Double>(); //hace falta?
-		//vertices.agregarElemento(g.dameVertice());
-	}
-	
-	private void arbol() {
+		this.grafo = new boolean[g.tamano()][g.tamano()];
+		this.vertices = new Conjunto<Integer>();
+		this.aristas = new HashMap<Tupla<Integer, Integer>,Double>();
+		
 		int verticeInicial = g.dameVertice();
 		vertices.agregarElemento(verticeInicial); //agrego un vertice random a V(arbol g min)
 		int i = 1;
 		Tupla<Integer,Integer> aristaMenorPeso = null;
+		
 		while (i <= g.tamano() - 1) {
 			HashMap<Tupla<Integer,Integer>,Double> aristasPosibles = aristasPosibles(); //trae las aristas que van de un vertice agregado a uno no agregado
 			double menorPeso = 1;
@@ -34,10 +34,11 @@ public class Prim {
 			}
 			aristas.put(aristaMenorPeso, g.damePesoDeArista(aristaMenorPeso.getX(), aristaMenorPeso.getY())); //agrego esa arista a V(arbol g min)
 			vertices.agregarElemento(vertices.pertenece(aristaMenorPeso.getX()) ?  aristaMenorPeso.getY() : aristaMenorPeso.getX()); //agrego el vertice de la arista que no habia sido agregado aun
+			agregarArista(aristaMenorPeso.getX(), aristaMenorPeso.getY()); //agrego arista en la matriz de booleans
+			}
 		}
-	}
 
-	private HashMap<Tupla<Integer,Integer>,Double> aristasPosibles(){
+	private HashMap<Tupla<Integer,Integer>,Double> aristasPosibles() {
 		HashMap<Tupla<Integer, Integer>, Double> aristasPosibles = new HashMap<Tupla<Integer, Integer>, Double>();
 		for(int i = 0; i < g.tamano(); i++) { // recorro los vertices del grafo original
 			if(vertices.pertenece(i)) {	//si el vertice ya fue agregado a V(arbol g min)
@@ -52,5 +53,10 @@ public class Prim {
 			}
 		}
 		return aristasPosibles;
+	}
+	
+	private void agregarArista(int i, int j) {
+		grafo[i][j] = true;
+		grafo[j][i] = true;
 	}
 }
