@@ -24,11 +24,15 @@ public class Grafo {
 		verificarVertice(j);
 		verificarDistintos(i, j);
 		agregarPeso(i, j, peso);
-		
 		A[i][j] = true;
 		A[j][i] = true;
 	}
 	
+	public double damePesoDeArista(int i, int j){
+		Tupla <Integer,Integer> arista = new Tupla<Integer, Integer>(i,j);
+		return aristas.get(arista);
+	}
+
 	private void agregarPeso(int i, int j, double peso) {
 		Tupla<Integer,Integer> arista = new Tupla<Integer,Integer>(i,j);
 		aristas.put(arista, peso);
@@ -95,7 +99,7 @@ public class Grafo {
 	
 	public int dameVertice() {
 		if (estaVacio()) {
-			throw new RuntimeException("El grafo no tiene ningún vértice");
+			throw new RuntimeException("El grafo no tiene ningun vertice");
 		}
 		Random random = new Random();
 		int vertice = random.nextInt(this.tamano()-1);
