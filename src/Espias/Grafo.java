@@ -2,6 +2,7 @@ package Espias;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
@@ -24,13 +25,23 @@ public class Grafo {
 		verificarVertice(j);
 		verificarDistintos(i, j);
 		agregarPeso(i, j, peso);
+		agregarPeso(j, i, peso);
 		A[i][j] = true;
 		A[j][i] = true;
 	}
 	
 	public double damePesoDeArista(int i, int j){
-		Tupla <Integer,Integer> arista = new Tupla<Integer, Integer>(i,j);
-		return aristas.get(arista);
+		if (!existeArista(i,j)) {
+			throw new IllegalArgumentException("No existe la arista" + i + " " + j);
+		}
+		
+		double peso = 0;
+		for(Entry<Tupla<Integer, Integer>, Double> a : aristas.entrySet()) {
+			if (a.getKey().getX() == i && a.getKey().getY() == j) {
+				peso = a.getValue();
+			}
+		}
+		return peso;
 	}
 
 	private void agregarPeso(int i, int j, double peso) {

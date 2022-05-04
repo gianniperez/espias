@@ -15,6 +15,18 @@ public class GrafoTest {
 	}
 	
 	@Test
+	public void damePesoDeAristaTest() {
+		g.agregarArista(1, 2, 0.5);
+		double p = g.damePesoDeArista(1, 2);
+		assertEquals(p, 0.5, 0);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void damePesoDeAristaInexsistenteTest() {
+		g.damePesoDeArista(1, 2);
+	}
+	
+	@Test
 	public void dameVerticeTest() {
 		int a = g.dameVertice();
 		assertTrue(a <= g.tamano());
