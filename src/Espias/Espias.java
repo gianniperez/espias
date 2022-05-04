@@ -13,8 +13,6 @@ public class Espias {
 		espias = new Conjunto<String>();
 		leerNombres();
 		redEspias = new Grafo(espias.cantElementos());
-		//armarRedEspias();
-		//redEspiasConMenorRiesgo = new ArbolGenMinPrim(redEspias);
 	}
 	
 	public void leerNombres() {
@@ -29,24 +27,24 @@ public class Espias {
 		} catch(Exception ex) {}
 	}
 	
-	public void armarRedEspias() { //aleatoriamente
-		Random r = new Random();
-		int cantMaxAristas = (redEspias.tamano() * (redEspias.tamano() - 1)) / 2;
-		for (int n = 0; n < cantMaxAristas; n++) {
-			int i = r.nextInt(espias.cantElementos());
-			int j = r.nextInt(espias.cantElementos());
-			double p = r.nextDouble();
-			if (i != j) agregarPosibleEncuentro(i, j, p);
-		}
-	}
-	
 	public void agregarPosibleEncuentro(int i, int j, double peso) {
 		System.out.println(i + " " + j + " " + peso);
+		
+		if (i == j)
+			throw new IllegalArgumentException("No puede haber un encuentro entre un espia y el mismo");
+		
+		if (redEspias.existeArista(i, j))
+			throw new IllegalArgumentException("Ya existe ese posible encuentro");
+		
 		redEspias.agregarArista(i, j, peso);
 	}
 
 	public ArbolGenMinPrim getRedEspiasConMenorRiesgo() {
 		return redEspiasConMenorRiesgo;
+	}
+
+	public Grafo getRedEspias() {
+		return redEspias;
 	}
 
 	public Conjunto<String> getEspias(){
