@@ -13,8 +13,8 @@ public class Espias {
 		espias = new Conjunto<String>();
 		leerNombres();
 		redEspias = new Grafo(espias.cantElementos());
-		armarRedEspias();
-		redEspiasConMenorRiesgo = new ArbolGenMinPrim(redEspias);
+		//armarRedEspias();
+		//redEspiasConMenorRiesgo = new ArbolGenMinPrim(redEspias);
 	}
 	
 	public void leerNombres() {
@@ -24,7 +24,7 @@ public class Espias {
 			String nombre;
 			while ((nombre = lectura.readLine()) != null) {
 				espias.agregarElemento(nombre);
-				}
+			}
 			lectura.close();
 		} catch(Exception ex) {}
 	}
@@ -40,11 +40,16 @@ public class Espias {
 		}
 	}
 	
-	private void agregarPosibleEncuentro(int i, int j, double peso) {
+	public void agregarPosibleEncuentro(int i, int j, double peso) {
+		System.out.println(i + " " + j + " " + peso);
 		redEspias.agregarArista(i, j, peso);
 	}
 
 	public ArbolGenMinPrim getRedEspiasConMenorRiesgo() {
 		return redEspiasConMenorRiesgo;
+	}
+
+	public Conjunto<String> getEspias(){
+		return espias;
 	}
 }
