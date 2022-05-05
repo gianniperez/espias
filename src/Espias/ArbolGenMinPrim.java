@@ -49,7 +49,6 @@ public class ArbolGenMinPrim {
 		HashMap<Tupla<Integer, Integer>, Double> aristasPosibles = new HashMap<Tupla<Integer, Integer>, Double>();
 		for(int i = 0; i < g.tamano(); i++) { // recorro los vertices del grafo original
 			if(vertices.pertenece(i)) {	//si el vertice ya fue agregado a V(arbol g min)
-				System.out.println("vertice: " + i);
 				Set<Integer> vecinos = g.vecinos(i); //obtengo todos sus vecinos
 				Iterator<Integer> iter = vecinos.iterator();
 				while(iter.hasNext()) { //recorro los vecinos de ese vertice para ver las aristas que forman

@@ -3,6 +3,8 @@ package Espias;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class Interfaz {
 
@@ -72,40 +74,66 @@ public class Interfaz {
 		lblEspia.setBounds(90, 51, 46, 31);
 		frame.getContentPane().add(lblEspia);
 
-		JLabel lblProbabilidad = new JLabel("Probabilidad de intercepciÃ³n");
+		JLabel lblProbabilidad = new JLabel("Probabilidad de intercepción");
 		lblProbabilidad.setBounds(225, 34, 210, 65);
 		frame.getContentPane().add(lblProbabilidad);
 
 		JLabel lblEspia_1 = new JLabel("Espia");
 		lblEspia_1.setBounds(455, 46, 46, 40);
 		frame.getContentPane().add(lblEspia_1);
+		
+		JLabel lblMensajeError = new JLabel("");
+		lblMensajeError.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensajeError.setForeground(new Color(128, 0, 0));
+		lblMensajeError.setBounds(51, 117, 488, 31);
+		frame.getContentPane().add(lblMensajeError);
+		
+		JLabel lblResultados = new JLabel("a");
+		lblResultados.setBounds(29, 117, 192, 73);
+		frame.getContentPane().add(lblResultados);
 
-		JButton btnNewButton = new JButton("Agregar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAgregar = new JButton("Agregar");
+		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int espiaSeleccionado1 = comboEspias1.getSelectedIndex();
 				int espiaSeleccionado2 = comboEspias2.getSelectedIndex();
-				if(espiaSeleccionado1 != espiaSeleccionado2)
+				
+				if(espiaSeleccionado1 == espiaSeleccionado2)
+					lblMensajeError.setText("No puede haber un encuentro entre un mismo espía!");
+				
+				if (!espias.getRedEspias().existeArista(espiaSeleccionado1, espiaSeleccionado2))
+					lblMensajeError.setText("Ese posible encuentro ya fue agregado!");
+				
+				if(espiaSeleccionado1 != espiaSeleccionado2 && !espias.getRedEspias().existeArista(espiaSeleccionado1, espiaSeleccionado2))
 					espias.agregarPosibleEncuentro(comboEspias1.getSelectedIndex(), comboEspias2.getSelectedIndex(), (double) probabilidades.getSelectedItem());
-				comboEspias1.setSelectedIndex(0);
-				comboEspias2.setSelectedIndex(0);
+					lblMensajeError.setText("");
 			}
 		});
-		btnNewButton.setBounds(254, 159, 90, 21);
-		frame.getContentPane().add(btnNewButton);
+		btnAgregar.setBounds(254, 159, 90, 21);
+		frame.getContentPane().add(btnAgregar);
+
+		JButton btnResultado = new JButton("Mostrar resultado");
+		btnResultado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblResultados.setText(cargarResultados());
+
+			}
+		});
+		btnResultado.setBounds(226, 236, 145, 21);
+		frame.getContentPane().add(btnResultado);
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(-53, 190, 702, 12);
 		frame.getContentPane().add(separator);
-
-		JButton btnNewButton_1 = new JButton("Mostrar resultado");
-		btnNewButton_1.setBounds(226, 236, 145, 21);
-		frame.getContentPane().add(btnNewButton_1);
-
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 	}
 
+	private String cargarResultados() {
+		return "";
+	}
+	
 	private void setComboProbabilidades(JComboBox probabilidades) {
 		for (int i = 0; i <= 10; i++)
 			probabilidades.addItem((double) i / 10);

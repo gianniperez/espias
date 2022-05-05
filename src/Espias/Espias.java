@@ -2,6 +2,7 @@ package Espias;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Espias {
@@ -31,18 +32,20 @@ public class Espias {
 		System.out.println(i + " " + j + " " + peso);
 		
 		if (i == j)
-			throw new IllegalArgumentException("No puede haber un encuentro entre un espia y el mismo");
+			throw new IllegalArgumentException("No puede haber un encuentro entre un mismo espia");
 		
 		if (redEspias.existeArista(i, j))
 			throw new IllegalArgumentException("Ya existe ese posible encuentro");
 		
 		redEspias.agregarArista(i, j, peso);
 	}
-
-	public ArbolGenMinPrim getRedEspiasConMenorRiesgo() {
-		return redEspiasConMenorRiesgo;
+	
+	public HashMap<Tupla<Integer, Integer>, Double> redEspiasConMenorRiesgo() {
+		redEspiasConMenorRiesgo = new ArbolGenMinPrim(redEspias);
+		redEspiasConMenorRiesgo.armarArbol();
+		return redEspiasConMenorRiesgo.getAristas();
 	}
-
+	
 	public Grafo getRedEspias() {
 		return redEspias;
 	}

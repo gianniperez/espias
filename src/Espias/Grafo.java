@@ -120,4 +120,9 @@ public class Grafo {
 	public boolean estaVacio() {
 		return tamano() == 0;
 	}
+
+	public HashMap<Tupla<Integer, Integer>, Double> getAristas() {
+		return aristas;
+	}
+	
 }
