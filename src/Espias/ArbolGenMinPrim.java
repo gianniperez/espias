@@ -28,17 +28,22 @@ public class ArbolGenMinPrim {
 		while (i <= g.tamano() - 1) {
 			HashMap<Tupla<Integer,Integer>,Double> aristasPosibles = aristasPosibles(); //trae las aristas que van de un vertice agregado a uno no agregado
 			double menorPeso = 1;
-
+			
 			for(Tupla<Integer, Integer> a : aristasPosibles.keySet()) {
 				 if(aristasPosibles.get(a) < menorPeso) {
 					 menorPeso = aristasPosibles.get(a);
 					 aristaMenorPeso = a; //me quedo con la arista de menor peso
 				 }
 			}
-			aristas.put(aristaMenorPeso, g.damePesoDeArista(aristaMenorPeso.getX(), aristaMenorPeso.getY())); //agrego esa arista a V(arbol g min)
-			vertices.agregarElemento(vertices.pertenece(aristaMenorPeso.getX()) ?  aristaMenorPeso.getY() : aristaMenorPeso.getX()); //agrego el vertice de la arista que no habia sido agregado aun
-			agregarArista(aristaMenorPeso.getX(), aristaMenorPeso.getY()); //agrego arista en la matriz de booleans
+			
+			if (aristaMenorPeso != null) {
+				aristas.put(aristaMenorPeso, g.damePesoDeArista(aristaMenorPeso.getX(), aristaMenorPeso.getY())); //agrego esa arista a V(arbol g min)
+				vertices.agregarElemento(vertices.pertenece(aristaMenorPeso.getX()) ?  aristaMenorPeso.getY() : aristaMenorPeso.getX()); //agrego el vertice de la arista que no habia sido agregado aun
+				agregarArista(aristaMenorPeso.getX(), aristaMenorPeso.getY()); //agrego arista en la matriz de booleans
 			}
+			i++;
+			}
+		System.out.println(aristas);
 	}
 	
 	public HashMap<Tupla<Integer,Integer>,Double> aristasPosibles() {
@@ -64,4 +69,13 @@ public class ArbolGenMinPrim {
 		grafo[i][j] = true;
 		grafo[j][i] = true;
 	}
+
+	public HashMap<Tupla<Integer, Integer>, Double> getAristas() {
+		return aristas;
+	}
+
+	public Conjunto<Integer> getVertices() {
+		return vertices;
+	}
+	
 }
