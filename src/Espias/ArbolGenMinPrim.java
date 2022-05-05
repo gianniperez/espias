@@ -43,7 +43,6 @@ public class ArbolGenMinPrim {
 			}
 			i++;
 			}
-		System.out.println(aristas);
 	}
 	
 	public HashMap<Tupla<Integer,Integer>,Double> aristasPosibles() {
@@ -61,7 +60,6 @@ public class ArbolGenMinPrim {
 				}
 			}
 		}
-		System.out.println(aristasPosibles);
 		return aristasPosibles;
 	}
 	
