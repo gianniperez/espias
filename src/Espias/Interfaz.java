@@ -88,8 +88,9 @@ public class Interfaz {
 		lblMensajeError.setBounds(51, 117, 488, 31);
 		frame.getContentPane().add(lblMensajeError);
 		
-		JLabel lblResultados = new JLabel("a");
-		lblResultados.setBounds(29, 117, 192, 73);
+		JLabel lblResultados = new JLabel("");
+		lblResultados.setVerticalAlignment(SwingConstants.TOP);
+		lblResultados.setBounds(51, 36, 488, 150);
 		frame.getContentPane().add(lblResultados);
 
 		JButton btnAgregar = new JButton("Agregar");
@@ -115,8 +116,16 @@ public class Interfaz {
 		JButton btnResultado = new JButton("Mostrar resultado");
 		btnResultado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				comboEspias1.hide();
+				probabilidades.hide();
+				comboEspias2.hide();
+				lblAgregarPosiblesEncuentros.hide();
+				lblEspia.hide();
+				lblProbabilidad.hide();
+				lblEspia_1.hide();
+				btnAgregar.hide();
 				lblResultados.setText(cargarResultados());
-
+				btnResultado.setEnabled(false);
 			}
 		});
 		btnResultado.setBounds(226, 236, 145, 21);
@@ -131,7 +140,20 @@ public class Interfaz {
 	}
 
 	private String cargarResultados() {
-		return "";
+		
+		StringBuilder s = new StringBuilder();
+		
+		HashMap<Tupla<Integer, Integer>, Double> resultados = espias.redEspiasConMenorRiesgo();
+		System.out.println(resultados);
+		
+		for (Entry<Tupla<Integer, Integer>, Double> r: resultados.entrySet()) {
+			String espia1 = comboEspias1.getItemAt(r.getKey().getX()).toString();
+			String espia2 = comboEspias1.getItemAt(r.getKey().getY()).toString();
+			String probabilidad = "" + r.getValue();
+			s.append(espia1 + " debe encontrarse con " + espia2 + " Probabilidad de intercepción: " + probabilidad).append(" \n");
+		}
+		System.out.println(s.toString());
+		return s.toString();
 	}
 	
 	private void setComboProbabilidades(JComboBox probabilidades) {
