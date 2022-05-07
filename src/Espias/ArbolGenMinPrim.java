@@ -21,7 +21,7 @@ public class ArbolGenMinPrim {
 		vertices.agregarElemento(verticeInicial); //agrego un vertice random a V(arbol g min)
 		}
 
-	public void armarArbol() { //En método para poder testear
+	public void armarArbol() { //En mï¿½todo para poder testear
 		int i = 1;
 		Tupla<Integer,Integer> aristaMenorPeso = null;
 		
@@ -42,7 +42,7 @@ public class ArbolGenMinPrim {
 				agregarArista(aristaMenorPeso.getX(), aristaMenorPeso.getY()); //agrego arista en la matriz de booleans
 			}
 			i++;
-			}
+		}
 	}
 	
 	public HashMap<Tupla<Integer,Integer>,Double> aristasPosibles() {
