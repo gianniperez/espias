@@ -24,14 +24,14 @@ public class ArbolGenMinPrimTest {
 		g.agregarArista(1, 2, 0.5);
 		g.agregarArista(0, 2, 0.9);
 		g.agregarArista(0, 3, 0.7);
+		g.agregarArista(1, 4, 0.2);
 		g2.armarArbol();
 		assertTrue(g2.getAristas().size() > 0);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void armarArbolVacioTest() {
 		g2.armarArbol();
-		assertTrue(g2.getAristas().size() == 0);
 	}
 	
 	@Test
@@ -49,4 +49,11 @@ public class ArbolGenMinPrimTest {
 		assertTrue(aristasPosibles.size() == 0);
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void armarAGMconGrafoDisconexo() {
+		g.agregarArista(0, 1, 0.2);
+		g.agregarArista(0, 2, 0.4);
+		g.agregarArista(3, 4, 0.3);
+		g2.armarArbol();
+	}
 }

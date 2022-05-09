@@ -19,9 +19,13 @@ public class ArbolGenMinPrim {
 		
 		int verticeInicial = g.dameVertice();
 		vertices.agregarElemento(verticeInicial); //agrego un vertice random a V(arbol g min)
-		}
+	}
 
-	public void armarArbol() { //En m�todo para poder testear
+	public void armarArbol() {//En m�todo para poder testear
+
+		if(!BFS.esConexo(g))
+			throw new IllegalArgumentException("No se puede armar un Árbol generador mínimo de un grafo disconexo");
+
 		int i = 1;
 		Tupla<Integer,Integer> aristaMenorPeso = null;
 		

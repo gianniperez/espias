@@ -89,14 +89,6 @@ public class Interfaz {
 		lblMensajeAlAgregar.setBounds(51, 161, 488, 31);
 		frame.getContentPane().add(lblMensajeAlAgregar);
 
-		JTextArea lblResultados = new JTextArea("");
-		lblResultados.setEditable(false);
-		lblResultados.setOpaque(false);
-		lblResultados.setBounds(61, 10, 488, 237);
-		lblResultados.setForeground(new Color(0, 0, 0));
-		lblResultados.setFont(new Font("Tahoma", Font.BOLD, 12));
-		frame.getContentPane().add(lblResultados);
-
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,6 +112,14 @@ public class Interfaz {
 		});
 		btnAgregar.setBounds(254, 202, 90, 21);
 		frame.getContentPane().add(btnAgregar);
+
+		JTextArea lblResultados = new JTextArea("");
+		lblResultados.setEditable(false);
+		lblResultados.setOpaque(false);
+		lblResultados.setBounds(61, 10, 558, 237);
+		lblResultados.setForeground(new Color(0, 0, 0));
+		lblResultados.setFont(new Font("Tahoma", Font.BOLD, 12));
+		frame.getContentPane().add(lblResultados);
 
 		JButton btnResultado = new JButton("Mostrar resultado");
 		btnResultado.addActionListener(new ActionListener() {
@@ -150,23 +150,25 @@ public class Interfaz {
 	}
 
 	private String cargarResultados() {
-		
-		StringBuilder s = new StringBuilder();
-		
-		HashMap<Tupla<Integer, Integer>, Double> resultados = espias.redEspiasConMenorRiesgo();
-		System.out.println(resultados);
-		
-		if(resultados.size() == 0)
-			return "No es pobible comunicar a todos los espias con los valores ingresados";
 
-		for (Entry<Tupla<Integer, Integer>, Double> r: resultados.entrySet()) {
-			String espia1 = comboEspias1.getItemAt(r.getKey().getX()).toString();
-			String espia2 = comboEspias1.getItemAt(r.getKey().getY()).toString();
-			String probabilidad = "" + r.getValue();
-			s.append(espia1 + " debe encontrarse con " + espia2 + ". Probabilidad de intercepci�n: " + probabilidad).append(" \n");
+		try {
+			StringBuilder s = new StringBuilder();
+			HashMap<Tupla<Integer, Integer>, Double> resultados = espias.redEspiasConMenorRiesgo();
+			System.out.println(resultados);
+
+			for (Entry<Tupla<Integer, Integer>, Double> r: resultados.entrySet()) {
+				String espia1 = comboEspias1.getItemAt(r.getKey().getX()).toString();
+				String espia2 = comboEspias1.getItemAt(r.getKey().getY()).toString();
+				String probabilidad = "" + r.getValue();
+				s.append(espia1 + " debe encontrarse con " + espia2 + ". Probabilidad de intercepcion: " + probabilidad).append(" \n");
+			}
+			System.out.println(s.toString());
+			return s.toString();
+
+		}catch(IllegalArgumentException e) {
+			return "No es posible comunicar a todos los espias con los posibles encuentros establecidos";
 		}
-		System.out.println(s.toString());
-		return s.toString();
+
 	}
 	
 	private void setComboProbabilidades(JComboBox probabilidades) {
