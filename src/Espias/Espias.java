@@ -8,7 +8,7 @@ import java.util.Random;
 public class Espias {
 	private Conjunto<String> espias;
 	private Grafo redEspias;
-	private ArbolGenMinPrim redEspiasConMenorRiesgo;
+	private AGMPrim redEspiasConMenorRiesgo;
 	
 	public Espias() {
 		espias = new Conjunto<String>();
@@ -29,8 +29,6 @@ public class Espias {
 	}
 	
 	public void agregarPosibleEncuentro(int i, int j, double peso) {
-		System.out.println(i + " " + j + " " + peso);
-		
 		if (i == j)
 			throw new IllegalArgumentException("No puede haber un encuentro entre un mismo espia");
 		
@@ -41,7 +39,7 @@ public class Espias {
 	}
 	
 	public HashMap<Tupla<Integer, Integer>, Double> redEspiasConMenorRiesgo() {
-		redEspiasConMenorRiesgo = new ArbolGenMinPrim(redEspias);
+		redEspiasConMenorRiesgo = new AGMPrim(redEspias);
 		redEspiasConMenorRiesgo.armarArbol();
 		return redEspiasConMenorRiesgo.getAristas();
 	}

@@ -4,16 +4,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-public class ArbolGenMinPrim {
+public class AGMPrim {
 
 	private Grafo g;
-	private boolean[][] grafo;
 	private Conjunto<Integer> vertices;
 	private HashMap<Tupla<Integer, Integer>,Double> aristas;
 	
-	public ArbolGenMinPrim (Grafo g) {
+	public AGMPrim (Grafo g) {
 		this.g = g;
-		this.grafo = new boolean[g.tamano()][g.tamano()];
 		this.vertices = new Conjunto<Integer>();
 		this.aristas = new HashMap<Tupla<Integer, Integer>,Double>();
 		
@@ -21,7 +19,7 @@ public class ArbolGenMinPrim {
 		vertices.agregarElemento(verticeInicial); //agrego un vertice random a V(arbol g min)
 	}
 
-	public void armarArbol() {//En m�todo para poder testear
+	public void armarArbol() {
 
 		if(!BFS.esConexo(g))
 			throw new IllegalArgumentException("No se puede armar un Árbol generador mínimo de un grafo disconexo");
@@ -43,7 +41,6 @@ public class ArbolGenMinPrim {
 			if (aristaMenorPeso != null) {
 				aristas.put(aristaMenorPeso, g.damePesoDeArista(aristaMenorPeso.getX(), aristaMenorPeso.getY())); //agrego esa arista a V(arbol g min)
 				vertices.agregarElemento(vertices.pertenece(aristaMenorPeso.getX()) ?  aristaMenorPeso.getY() : aristaMenorPeso.getX()); //agrego el vertice de la arista que no habia sido agregado aun
-				agregarArista(aristaMenorPeso.getX(), aristaMenorPeso.getY()); //agrego arista en la matriz de booleans
 			}
 			i++;
 		}
@@ -64,11 +61,6 @@ public class ArbolGenMinPrim {
 			}
 		}
 		return aristasPosibles;
-	}
-	
-	public void agregarArista(int i, int j) {
-		grafo[i][j] = true;
-		grafo[j][i] = true;
 	}
 
 	public HashMap<Tupla<Integer, Integer>, Double> getAristas() {

@@ -7,15 +7,15 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ArbolGenMinPrimTest {
+public class AGMPrimTest {
 
 	private Grafo g;
-	private ArbolGenMinPrim g2;
+	private AGMPrim g2;
 	
 	@Before
 	public void setUp() {
 		g = new Grafo(5);
-		g2 = new ArbolGenMinPrim(g);
+		g2 = new AGMPrim(g);
 	}
 
 	@Test

@@ -154,7 +154,6 @@ public class Interfaz {
 		try {
 			StringBuilder s = new StringBuilder();
 			HashMap<Tupla<Integer, Integer>, Double> resultados = espias.redEspiasConMenorRiesgo();
-			System.out.println(resultados);
 
 			for (Entry<Tupla<Integer, Integer>, Double> r: resultados.entrySet()) {
 				String espia1 = comboEspias1.getItemAt(r.getKey().getX()).toString();
@@ -162,7 +161,6 @@ public class Interfaz {
 				String probabilidad = "" + r.getValue();
 				s.append(espia1 + " debe encontrarse con " + espia2 + ". Probabilidad de intercepcion: " + probabilidad).append(" \n");
 			}
-			System.out.println(s.toString());
 			return s.toString();
 
 		}catch(IllegalArgumentException e) {

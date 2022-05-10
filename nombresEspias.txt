@@ -8,10 +8,3 @@ Squirtle
 Snorlax
 Magikarp
 Dragonite
-Gyarados
-Absol
-Jigglypuff
-Lucario
-Umbreon
-Ampharos
-Flygon
