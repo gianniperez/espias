@@ -1,0 +1,79 @@
+= Espías - 2022
+Giannina Perez 43.729.769/2020 <giannina-b-perez@hotmail.com>;
+v1, {docdate}. Docentes: Javier Marenco y Patricia Bagnes (COM-01)
+:title-page:
+:numbered:
+:source-highlighter: coderay
+:tabsize: 4
+
+== Introducción
+
+Desarrollo de un sistema de espías a través de una interfaz gráfica de Eclipse, en Java.
+El objetivo principal fue aplicar una resolución del problema del árbol generador mínimo, por lo cual implementamos el algoritmo de Prim.
+El sistema consiste en establecer las probabilidades de conexiones entre espías, para que estos se encuentren y se pasen un mensaje secreto entre ellos.
+
+== Estructura de datos
+
+*Vertices (Conjunto):* No tienen tamaño definido, no se repiten, no es necesario que estén ordenados, son del mismo tipo (Integer).
+*Aristas (HashMap<Tupla<Integer, Integer>,Double>):* A partir de sus vértices extremos, se obtiene el peso de la arista. Las aristas no se repiten, no tiene tamaño definido.
+*Espías (Conjunto):* No tienen tamaño definido, los espías no se repiten, no es necesario que estén ordenados, son del mismo tipo (String).
+
+== Implementación
+
+*AGMPrim*
+
+`void armarArbol()`
+
+`HashMap<Tupla<Integer,Integer>,Double> aristasPosibles()`
+
+*Espias*
+
+`void leerNombres()`
+
+`void agregarPosibleEncuentro()`
+
+`public HashMap<Tupla<Integer, Integer>, Double> redEspiasConMenorRiesgo()`
+
+*Grafo*
+
+`void agregarArista()`
+
+`void damePesoDeArista()`
+
+`void agregarPeso()`
+
+`void eliminarArista()`
+
+`boolean existeArista()`
+
+`int tamano()`
+
+`Set<Integer> vecinos()`
+
+`void verificarDistintos()`
+
+`int dameVertice()`
+
+`boolean estaVacio()`
+
+*Interfaz*
+
+`void initialize()`
+
+`String cargarResultados()`
+
+`void setComboProbabilidades():
+
+`void setComboEspias()`
+
+== Decisiones de diseño
+
+- Para resolver el problema del árbol generador mínimo decidimos implementar el algoritmo de Prim. La forma que decidimos para implementarlo fue crear una clase la cual tiene un método que se encarga de armar el árbol a partir del grafo que recibe la clase.
+
+- Optamos por implementar el algoritmo BFS, el cual nos permite verificar que en la red de espías formada en la interfaz, el mensaje le llegue a todos los espías.
+
+- Debimos modificar de private a public algunos métodos, para poder testearlos. Por ejemplo, aristasPosibles() en AGMPrim, leerNombres() en Espias y agregarPeso() en Grafo.
+
+- Para agregar los posibles encuentros que forman el grafo inicial, implementamos en la interfaz tres comboBox donde se establecen los dos espías que van a tener un posible encuentro y la probabilidad de intercepción de ese encuentro.
+
+- Decidimos cargar los nombres de los espias desde un archivo de texto.
